@@ -71,13 +71,15 @@ def main() -> None:
                 continue
 
             pyi_content = pyi_path.read_text()
+            if not pyi_content.strip():
+                continue
             current_docstring = extract_docstring(pyi_content)
             author = get_author(current_docstring)
             new_docstring = create_docstring(author, library_name, pyi_path.relative_to(stubs_path))
             if current_docstring:
                 new_pyi_content = pyi_content.replace(current_docstring, new_docstring)
             else:
-                new_pyi_content = f"{new_docstring}\n{pyi_content}"
+                new_pyi_content = f"{new_docstring}\n\n{pyi_content}"
             if pyi_content != new_pyi_content:
                 pyi_path.write_text(new_pyi_content)
                 print(f"Updated {pyi_path.relative_to(work_path)}")

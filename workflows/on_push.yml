@@ -1,0 +1,63 @@
+name: Code style
+concurrency:
+  group: on_push
+  cancel-in-progress: true
+
+on:
+  push: {}
+  workflow_dispatch: {}
+
+jobs:
+  unit-tests:
+    name: Code style
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version:
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11"
+          - "3.12"
+          - "3.13"
+          - "3.14"
+        include:
+          - version: "3.8"
+            check-consistency: "true"
+          - version: "3.9"
+            check-consistency: "true"
+          - version: "3.10"
+            check-consistency: "true"
+          - version: "3.11"
+            check-consistency: "true"
+          - version: "3.12"
+            check-consistency: "true"
+          - version: "3.13"
+            check-consistency: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.version }}
+          allow-prereleases: true
+      - name: Set up uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      - name: Install the project
+        run: |
+          uv sync --all-extras --dev
+      - name: Run pre-commit
+        run: uvx pre-commit run --all-files
+      - name: Check types in test.py
+        run: |
+          uv build --wheel
+          OUTPUT=`uvx --python=3.8 --with dist/*.whl mypy test.py || true`
+          echo $OUTPUT
+          if [[ ${OUTPUT} != *"Found 1 error"* ]];then
+            echo "Stubs test failed: $TEST"
+            exit 1
+          fi
+      - name: Stubs consistency check
+        if: ${{ matrix.check-consistency }}
+        run: |
+          uv run istub -d

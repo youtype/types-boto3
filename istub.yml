@@ -1,0 +1,15 @@
+packages:
+  - name: boto3
+    path: ./boto3-stubs
+    checks:
+      flake8: false
+      pyright: false
+      mypy: false
+      stubtest: true
+    snapshots:
+      stubtest: |-
+        error: boto3.resources.base.ServiceResource.meta variable differs from runtime type None
+        Stub: in file ./boto3-stubs/resources/base.pyi:31
+        boto3.resources.base.ResourceMeta
+        Runtime:
+        None

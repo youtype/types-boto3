@@ -1,0 +1,91 @@
+name: Publish types-boto3
+concurrency: publish
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # every day at midnight
+  workflow_dispatch:
+    inputs:
+      force:
+        required: false
+        default: false
+        type: boolean
+        description: Force build even if consistency check fails (set to true)
+      version:
+        required: false
+        default: ""
+        type: string
+        description: Use a specific package version, latest otherwise
+
+env:
+  PACKAGE: boto3
+  STUBS: types-boto3
+
+jobs:
+  check-version:
+    name: Check version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.vars.outputs.version }}
+      stubs-version: ${{ steps.vars.outputs.stubs-version }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract versions
+        id: vars
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { setupGlobals, extractLocalVersions } = require('./.github/workflows/helpers.js')
+
+            setupGlobals({ fetch, core, context })
+            await extractLocalVersions()
+
+  publish-stubs:
+    name: Publish stubs
+    runs-on: ubuntu-latest
+    needs: check-version
+    if: needs.check-version.outputs.stubs-version
+    env:
+      VERSION: ${{ needs.check-version.outputs.version }}
+      STUBS_VERSION: ${{ needs.check-version.outputs.stubs-version }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Set up uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      - name: Install the project
+        run: uv sync --dev
+      - name: Install package
+        run: uv pip install ${PACKAGE}==${VERSION}
+      - name: Stubs consistency check
+        if: "${{ github.event.inputs.force != 'true' }}"
+        run: |
+          uv run --no-sync istub -d
+      - name: Bump version
+        run: |
+          echo "Bumping version to ${STUBS_VERSION}"
+          sed -i 's/^version = ".*"$/version = "'$STUBS_VERSION'"/' pyproject.toml
+          uv pip install .
+      - name: Commit changes
+        if: "${{ github.event.inputs.version == '' }}"
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions"
+          git add pyproject.toml
+          git commit -m "Release ${STUBS_VERSION}"
+          git push
+      # - name: Publish to PyPI
+      #   env:
+      #     TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+      #     TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      #   run: |
+      #     uvx --from build pyproject-build --installer uv
+      #     uvx twine upload --non-interactive dist/*
+      - name: Report status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            core.notice(`Released ${process.env.STUBS} ${process.env.STUBS_VERSION}`)

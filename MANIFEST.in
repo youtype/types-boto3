@@ -1,0 +1,4 @@
+include boto3-stubs/py.typed
+include boto3-stubs/*.pyi
+include boto3-stubs/*/*.pyi
+include boto3-stubs/*/*/*.pyi

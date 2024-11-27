@@ -332,9 +332,6 @@ wheels = [
 name = "types-boto3"
 version = "1.35.70"
 source = { editable = "." }
-dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.9'" },
-]
 
 [package.dev-dependencies]
 dev = [
@@ -353,7 +350,6 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "typing-extensions", marker = "python_full_version < '3.9'", specifier = ">=4.1.0" }]
 
 [package.metadata.requires-dev]
 dev = [

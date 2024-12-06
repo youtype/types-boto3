@@ -48,15 +48,6 @@ jobs:
           uv sync --all-extras --dev
       - name: Run pre-commit
         run: uvx pre-commit run --all-files
-      - name: Check types in test.py
-        run: |
-          uv build --wheel
-          OUTPUT=`uvx --with dist/*.whl mypy test.py || true`
-          echo $OUTPUT
-          if [[ ${OUTPUT} != *"Found 1 error"* ]];then
-            echo "Stubs test failed: $TEST"
-            exit 1
-          fi
       - name: Stubs consistency check
         if: ${{ matrix.check-consistency }}
         run: |

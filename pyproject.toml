@@ -27,9 +27,8 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
-[tool.uv]
-config-settings = { editable-mode = "strict" }
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "setuptools",
     "boto3",
     "s3transfer",
@@ -38,11 +37,13 @@ dev-dependencies = [
     "mypy",
     "pyright",
     "istub",
-    "types-s3transfer",
-    "types-awscrt",
-    "botocore-stubs",
     "docutils",
 ]
+types = ["types-s3transfer", "types-awscrt", "botocore-stubs"]
+
+[tool.uv]
+config-settings = { editable-mode = "strict" }
+default-groups = ["dev", "types"]
 
 [project.urls]
 Homepage = "https://github.com/youtype/types-boto3"

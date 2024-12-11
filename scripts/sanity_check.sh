@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
+rm -rf dist/*
 uv build --wheel
 OUTPUT=`uvx --with dist/*.whl mypy test.py || true`
 echo $OUTPUT

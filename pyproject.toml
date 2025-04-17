@@ -4,13 +4,12 @@ version = "1.37.32"
 requires-python = ">=3.8"
 description = "Type annotations and code completion for boto3"
 authors = [{ name = "Vlad Emelianov", email = "vlad.emelianov.nz@gmail.com" }]
-license = { file = "LICENSE" }
+license-files = ["LICENSE"]
 readme = "README.md"
 keywords = ["botocore", "type-annotations", "pyright", "mypy", "boto3"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
-    "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
@@ -57,7 +56,14 @@ requires = ['setuptools']
 build-backend = 'setuptools.build_meta'
 
 [tool.setuptools]
-packages = ["boto3-stubs"]
+packages = [
+    "boto3-stubs",
+    "boto3-stubs.s3",
+    "boto3-stubs.docs",
+    "boto3-stubs.dynamodb",
+    "boto3-stubs.ec2",
+    "boto3-stubs.resources",
+]
 
 [tool.pyright]
 include = ["boto3-stubs"]

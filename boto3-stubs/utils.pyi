@@ -10,11 +10,13 @@ from botocore.model import ServiceModel
 from botocore.session import Session
 from botocore.waiter import Waiter, WaiterModel
 
-class ServiceContext(NamedTuple):
+class _ServiceContext(NamedTuple):
     service_name: str
     service_model: ServiceModel
     service_waiter_model: WaiterModel | None
     resource_json_definitions: dict[str, Any]
+
+class ServiceContext(_ServiceContext): ...
 
 def import_module(name: str) -> Any: ...
 def lazy_call(full_name: str, **kwargs: Any) -> Any: ...

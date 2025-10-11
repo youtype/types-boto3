@@ -4,22 +4,17 @@ Type annotations for boto3.utils module.
 Copyright 2024 Vlad Emelianov
 """
 
-from typing import Any, TypeVar
+from typing import Any, NamedTuple
 
 from botocore.model import ServiceModel
 from botocore.session import Session
 from botocore.waiter import Waiter, WaiterModel
 
-_R = TypeVar("_R")
-
-class ServiceContext:
-    def __new__(
-        _cls: type[_R],
-        service_name: str,
-        service_model: ServiceModel,
-        service_waiter_model: WaiterModel | None,
-        resource_json_definitions: dict[str, Any],
-    ) -> _R: ...
+class ServiceContext(NamedTuple):
+    service_name: str
+    service_model: ServiceModel
+    service_waiter_model: WaiterModel | None
+    resource_json_definitions: dict[str, Any]
 
 def import_module(name: str) -> Any: ...
 def lazy_call(full_name: str, **kwargs: Any) -> Any: ...

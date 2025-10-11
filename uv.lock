@@ -183,16 +183,14 @@ wheels = [
 
 [[package]]
 name = "istub"
-version = "0.2.4"
+version = "0.2.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pip", version = "25.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
-    { name = "pip", version = "25.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
     { name = "pyyaml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/44/97/17c5b2b4a2d6c4b1bc110470a403fbe01ac23419328f2e9885c395401379/istub-0.2.4.tar.gz", hash = "sha256:c05a9d0ce6c6cb6acca92be01462a866867e13d37a711caae87c2dd00006a6c1", size = 9890, upload-time = "2023-11-29T18:48:37.065Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d6/05/5316d594a0f6df60351429d58f9b37ab62a0266a3c653863e6d85da1f1b5/istub-0.2.5.tar.gz", hash = "sha256:81f5d3c7f748d3043ba5194d48e053c42b31af355f147b11166e723d7db3c5e9", size = 56316, upload-time = "2025-10-11T22:28:46.7Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b4/82/f42b052f1fec914f3ab633d571b1339fa76b1ce08674cbd0bff757a93392/istub-0.2.4-py3-none-any.whl", hash = "sha256:dac1a1d86e6846f43c8e562c2e4ed1fe2cefbaaf9829b7ce9cce844e409cf954", size = 14034, upload-time = "2023-11-29T18:48:36.025Z" },
+    { url = "https://files.pythonhosted.org/packages/14/71/e463c23cdcbf982764c9f6088047719d7f5ec592cb86ca98c48746e66e60/istub-0.2.5-py3-none-any.whl", hash = "sha256:a7d5e449f54c2c020bb9e1778968e35f100293b9cbc7fcff6ca5629a74a0b4ab", size = 15914, upload-time = "2025-10-11T22:28:45.461Z" },
 ]
 
 [[package]]
@@ -337,31 +335,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/ca/bc/f35b8446f4531a7cb215605d100cd88b7ac6f44ab3fc94870c120ab3adbf/pathspec-0.12.1.tar.gz", hash = "sha256:a482d51503a1ab33b1c67a6c3813a26953dbdc71c31dacaef9a838c4e29f5712", size = 51043, upload-time = "2023-12-10T22:30:45Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/cc/20/ff623b09d963f88bfde16306a54e12ee5ea43e9b597108672ff3a408aad6/pathspec-0.12.1-py3-none-any.whl", hash = "sha256:a0d503e138a4c123b27490a4f7beda6a01c6f288df0e4a8b79c7eb0dc7b4cc08", size = 31191, upload-time = "2023-12-10T22:30:43.14Z" },
-]
-
-[[package]]
-name = "pip"
-version = "25.0.1"
-source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version < '3.9'",
-]
-sdist = { url = "https://files.pythonhosted.org/packages/70/53/b309b4a497b09655cb7e07088966881a57d082f48ac3cb54ea729fd2c6cf/pip-25.0.1.tar.gz", hash = "sha256:88f96547ea48b940a3a385494e181e29fb8637898f88d88737c5049780f196ea", size = 1950850, upload-time = "2025-02-09T17:14:04.423Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c9/bc/b7db44f5f39f9d0494071bddae6880eb645970366d0a200022a1a93d57f5/pip-25.0.1-py3-none-any.whl", hash = "sha256:c46efd13b6aa8279f33f2864459c8ce587ea6a1a59ee20de055868d8f7688f7f", size = 1841526, upload-time = "2025-02-09T17:14:01.463Z" },
-]
-
-[[package]]
-name = "pip"
-version = "25.2"
-source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version >= '3.10'",
-    "python_full_version == '3.9.*'",
-]
-sdist = { url = "https://files.pythonhosted.org/packages/20/16/650289cd3f43d5a2fadfd98c68bd1e1e7f2550a1a5326768cddfbcedb2c5/pip-25.2.tar.gz", hash = "sha256:578283f006390f85bb6282dffb876454593d637f5d1be494b5202ce4877e71f2", size = 1840021, upload-time = "2025-07-30T21:50:15.401Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/b7/3f/945ef7ab14dc4f9d7f40288d2df998d1837ee0888ec3659c813487572faa/pip-25.2-py3-none-any.whl", hash = "sha256:6d67a2b4e7f14d8b31b8b52648866fa717f45a1eb70e83002f4331d07e953717", size = 1752557, upload-time = "2025-07-30T21:50:13.323Z" },
 ]
 
 [[package]]

@@ -4,11 +4,14 @@ Type annotations for boto3.crt module.
 Copyright 2024 Vlad Emelianov
 """
 
+import logging
 import threading
 from typing import Any
 
 from botocore.client import BaseClient
 from s3transfer.crt import BotocoreCRTRequestSerializer, CRTTransferManager
+
+logger: logging.Logger = ...
 
 CRT_S3_CLIENT: CRTS3Client | None = ...
 BOTOCORE_CRT_SERIALIZER: BotocoreCRTRequestSerializer | None = ...

@@ -9,6 +9,8 @@ from typing import Any
 
 SOCKET_ERROR: type[ConnectionError]
 
+TRANSFER_CONFIG_SUPPORTS_CRT: bool = ...
+
 rename_file = os.rename
 
 def filter_python_deprecation_warnings() -> None: ...

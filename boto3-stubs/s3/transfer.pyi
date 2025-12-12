@@ -30,19 +30,20 @@ def create_transfer_manager(
 def has_minimum_crt_version(minimum_version: str) -> bool: ...
 
 class TransferConfig(S3TransferConfig):
-    ALIAS: dict[str, str]
+    ALIAS: dict[str, str] = ...
+    DEFAULTS: dict[str, Any] = ...
 
     def __init__(
         self,
-        multipart_threshold: int = ...,
-        max_concurrency: int = ...,
-        multipart_chunksize: int = ...,
-        num_download_attempts: int = ...,
-        max_io_queue: int = ...,
-        io_chunksize: int = ...,
-        use_threads: bool = ...,
+        multipart_threshold: int | None = ...,
+        max_concurrency: int | None = ...,
+        multipart_chunksize: int | None = ...,
+        num_download_attempts: int | None = ...,
+        max_io_queue: int | None = ...,
+        io_chunksize: int | None = ...,
+        use_threads: bool | None = ...,
         max_bandwidth: int | None = ...,
-        preferred_transfer_client: str = ...,
+        preferred_transfer_client: str | None = ...,
     ) -> None:
         self.use_threads: bool
 
